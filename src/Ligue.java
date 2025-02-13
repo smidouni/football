@@ -92,6 +92,11 @@ public class Ligue {
 		return equipes;
 	}
 
+	public void addEquipe(Equipe equipe) {
+		equipes.add(equipe);
+		sortEquipes();
+	}
+
 	/**
 	 * Gets the list of matches in the league.
 	 *

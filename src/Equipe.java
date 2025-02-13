@@ -73,6 +73,8 @@ public class Equipe {
 		JoueurDAO.getInstance().ajouterJoueurs(joueurs, nouvelleEquipe);
 		nouvelleEquipe.modifyJoueurs(joueurs);
 
+		ligue.addEquipe(nouvelleEquipe);
+
 		return nouvelleEquipe;
 	}
 
