@@ -1,19 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-/**
- * Panel for user login.
- * 
- * <p>
- * This panel provides a login form where users can enter their username and
- * password.
- * It then validates the credentials using the {@link UserDAO}.
- * </p>
- * 
- * @version 1.0
- */
 public class LoginPanel extends JPanel implements ActionListener {
     private JTextField usernameField;
     private JPasswordField passwordField;
@@ -21,9 +9,6 @@ public class LoginPanel extends JPanel implements ActionListener {
     private JButton loginButton;
     private JButton goToRegisterButton;
 
-    /**
-     * Constructs a LoginPanel and initializes its UI components.
-     */
     public LoginPanel() {
         setLayout(new BorderLayout());
         setBackground(Color.DARK_GRAY);
@@ -103,13 +88,18 @@ public class LoginPanel extends JPanel implements ActionListener {
         formPanel.add(buttonsPanel, gbc);
 
         add(formPanel, BorderLayout.CENTER);
+
+        // Reset fields when the panel becomes visible
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                usernameField.setText("");
+                passwordField.setText("");
+                errorLabel.setText("");
+            }
+        });
     }
 
-    /**
-     * Handles the login button action.
-     *
-     * @param e the ActionEvent triggered by clicking the login button.
-     */
     @Override
     public void actionPerformed(ActionEvent e) {
         String username = usernameField.getText().trim();

@@ -1,19 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-/**
- * Panel for user registration.
- * 
- * <p>
- * This panel provides a form for new users to register by entering a username
- * and password.
- * It validates input and calls {@link UserDAO} to register the user.
- * </p>
- * 
- * @version 1.0
- */
 public class RegisterPanel extends JPanel implements ActionListener {
     private JTextField usernameField;
     private JPasswordField passwordField;
@@ -22,9 +10,6 @@ public class RegisterPanel extends JPanel implements ActionListener {
     private JButton registerButton;
     private JButton goToLoginButton;
 
-    /**
-     * Constructs a RegisterPanel and initializes its UI components.
-     */
     public RegisterPanel() {
         setLayout(new BorderLayout());
         setBackground(Color.DARK_GRAY);
@@ -114,13 +99,19 @@ public class RegisterPanel extends JPanel implements ActionListener {
         formPanel.add(buttonsPanel, gbc);
 
         add(formPanel, BorderLayout.CENTER);
+
+        // Reset fields when the panel becomes visible
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                usernameField.setText("");
+                passwordField.setText("");
+                confirmPasswordField.setText("");
+                errorLabel.setText("");
+            }
+        });
     }
 
-    /**
-     * Handles the register button action.
-     *
-     * @param e the ActionEvent triggered by clicking the register button.
-     */
     @Override
     public void actionPerformed(ActionEvent e) {
         String username = usernameField.getText().trim();
